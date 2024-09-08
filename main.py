@@ -2,10 +2,10 @@
 import tkinter
 from tkinter import ttk, messagebox
 import datetime
-import sv_ttk
+#import sv_ttk
 import os
 import json
-from PIL import ImageTk, Image
+#from PIL import ImageTk, Image
 
 #=======================Importing Custom Modules=======================
 import taskcreator
@@ -90,7 +90,7 @@ def remove_task():
         else:
             return
     else:
-        messagebox.showwarning("Warning,"No Item Selected!")
+        messagebox.showwarning("Warning", "No Item Selected!")
                                
 def callviewer():
     selected_file = Task_list_box.curselection()
@@ -138,8 +138,8 @@ def run_task():
             databridge.send_coordinates(run_file, run_port, root)
         else:
             messagebox.showerror("Error", "No file selected",parent=root)
-        else: 
-            messagebox.showerror("Error","No port selected")
+    else: 
+        messagebox.showerror("Error","No port selected")
 
 def getcurpos():
     arm_no = select_arm
@@ -149,7 +149,7 @@ def getcurpos():
             resp = databridge.retrv_cur_pos(arm_no,run_port)
             resp_x = int(resp[:3])
             resp_y = int(resp[3:6])
-            resp_z = int(resp(6:9))
+            resp_z = int(resp[6:9])
             mv_text_entry2.delete(0,"end")
             mv_text_entry2.insert(0,"")
             mv_text_entry2.insert(0,f"X: {resp_x}, Y: {resp_y}, Z: {resp_z}")
@@ -215,22 +215,22 @@ arm_text.grid(row=0,column=1)
 
 #Middle Bottom Pane Widgets
 Retrv_curr_pos = ttk.Button(middle_bottom_pane, text="Retrieve\nCurrent\nPosition", padding=(10,40), command=getcurpos)
-Retrv_curr_pos.grid(row=0,column=0,rowspan=4,pady(10,0),padx=(10,0),sticky='E W')
+Retrv_curr_pos.grid(row=0,column=0,rowspan=4,pady=(10,0),padx=(10,0),sticky ='E W')
 joint_label = ttk.Label(middle_bottom_pane, text = "Joint Values")
-joint_label.grid(row=0,column=1,pady(10,0),padx=(10,0),sticky='W')
-mv_to_joints =ttk.Button(middle_bottom_pane, text="Move to Joints", padding(25,5))
+joint_label.grid(row=0,column=1,pady=(10,0),padx=(10,0),sticky='W')
+mv_to_joints =ttk.Button(middle_bottom_pane, text="Move to Joints", padding=(25,5))
 mv_to_joints.grid(row=0,column=2,pady=(10,0),padx=(10,10),sticky='E')
 mv_text_entry = tkinter.Entry(middle_bottom_ane, width=45,fg="grey")
 mv_text_entry.insert(0, "Enter the joint values")
-mv_text_entry.grid(row=1,column=1,pady(5,0),padx=(10,10),columnspan=2, sticky='W')
+mv_text_entry.grid(row=1,column=1,pady=(5,0),padx=(10,10),columnspan=2, sticky='W')
 cart_pos = ttk.Label(middle_bottom_pane, text="Cartesian Position")
 cart_pos.grid(row=2,column=1,pady=(10,0),padx=(10,0),sticky = 'W')
 mv_to_cart = ttk.Button(middle_bottom_pane, text ="Move to Postion", padding=(12,5))
 mv_to_cart.grid(row=2,column=2, pady=(10,0),padx=(10,0),sticky='W')
 mv_text_entry2 = tkinter.Entry(middle_bottom_pane, width=45, fg="grey")
 mv_text_entry2.grid(row=3,column=1,pady=(5,10),padx=(10,10),columnspan=2, sticky='W')
-time_label = ttk.Label(middle_bottom_pane, text="", padding(20,20,20,20))
-time_label.grid(row=4,column=0,padx=12, pady=12 columnspan=3)
+time_label = ttk.Label(middle_bottom_pane, text="", padding=(20,20,20,20))
+time_label.grid(row=4,column=0,padx=12, pady=12, columnspan=3)
 
 mv_text_entry.bind("<FocusIn>",lambda event: on_entry_click(event,mv_text_entry))
 mv_text_entry.bind("<FocusOut>",lambda event: on_focusout(event,mv_text_entry,"Enter the join values"))
